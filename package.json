@@ -1,0 +1,30 @@
+{
+  "name": "touch-dnd-remapped",
+  "version": "1.0.0",
+  "description": "Remaps touch drag and drop events.",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kwhitley/touch-dnd-remapped.git"
+  },
+  "keywords": [
+    "touch",
+    "dnd",
+    "events",
+    "browser",
+    "drag",
+    "drop"
+  ],
+  "author": "Kevin Whitley <krwhitley@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kwhitley/touch-dnd-remapped/issues"
+  },
+  "homepage": "https://github.com/kwhitley/touch-dnd-remapped#readme",
+  "devDependencies": {
+    "yarn-release": "^1.10.3"
+  }
+}
