@@ -1,8 +1,15 @@
 {
   "name": "touch-dnd-remapped",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Remaps touch drag and drop events.",
   "main": "dist/index.js",
+  "files": [
+    "./dist/index.js",
+    "./dist/DataTransfer.js",
+    "./dist/FileList.js",
+    "./dist/parseTextUriList.js",
+    "./dist/simulateEvent.js"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
