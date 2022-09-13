@@ -1,6 +1,6 @@
 {
   "name": "touch-dnd-remapped",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Remaps touch drag and drop events.",
   "main": "./dist/index.js",
   "scripts": {

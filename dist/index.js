@@ -127,9 +127,6 @@ function handleTouchEnd(event) {
 
     var dataTransfer = touchDndCustomEvents.dataTransfer;
 
-    console.log('handle touch end', x, y, target, dataTransfer)
-    console.log('is target preview?', target === touchDndCustomEvents.store.dragPreviewElement)
-
     // Ensure dragover event generation is terminated
     clearInterval(touchDndCustomEvents.dragOvers);
 
