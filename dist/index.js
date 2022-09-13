@@ -66,9 +66,11 @@ function handleTouchStart(event) {
     store.mode = 'readwrite';
     _simulateEvent2['default']('touchdragstart', event, dataTransfer, target);
 
+    console.log('touch', event.targetTouches[0])
+
     // hijack previous pattern
     store.dragPreviewElement = preview
-    _dragPreview.updateDragPreview(preview, event.targetTouches[0].pageX, event.targetTouches[0].pageY);
+    _dragPreview.updateDragPreview(preview, event.targetTouches[0].clientX, event.targetTouches[0].clientY);
   }
 }
 
