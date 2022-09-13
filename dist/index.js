@@ -25,11 +25,14 @@ var touchDndCustomEvents = {
   'store': null
 };
 
+const DRAG_MIN_DISTANCE = 5
+const DRAG_MIN_TIME = 150
+
 const getPreviewContainer = () => document.getElementById('touchDndPreviewContainer')
 
 function handleTouchStart(event) {
   var target = event.target;
-  if (target.hasAttribute("draggable")) {
+  if (target.hasAttribute('draggable')) {
     event.preventDefault();
 
     var x = event.changedTouches[0].clientX;
@@ -60,13 +63,19 @@ function handleTouchStart(event) {
     var x = event.targetTouches[0].pageX - rect.left;
     var y = event.targetTouches[0].pageY - rect.top;
 
+    // embed move stats
+    preview.moveStats = {
+      x: event.targetTouches[0].clientX,
+      y: event.targetTouches[0].clientY,
+      start: new Date(),
+      target,
+    }
+
     preview.dragPointOffsetX = -x
     preview.dragPointOffsetY = -y
 
     store.mode = 'readwrite';
     _simulateEvent2['default']('touchdragstart', event, dataTransfer, target);
-
-    console.log('touch', event.targetTouches[0])
 
     // hijack previous pattern
     store.dragPreviewElement = preview
@@ -126,14 +135,24 @@ function handleTouchEnd(event) {
     var x = event.changedTouches[0].clientX;
     var y = event.changedTouches[0].clientY;
     var target = document.elementFromPoint(x, y);
-
     var dataTransfer = touchDndCustomEvents.dataTransfer;
+    const preview = getPreviewContainer().children[0]
+    const { moveStats } = getPreviewContainer().children[0]
+
+    const dragTime = +new Date() - moveStats.start
+    const dx = Math.abs(moveStats.x - x)
+    const dy = Math.abs(moveStats.y - y)
+    const largestMove = Math.max(dx, dy)
 
     // Ensure dragover event generation is terminated
     clearInterval(touchDndCustomEvents.dragOvers);
 
-    touchDndCustomEvents.store.mode = 'readonly';
-    _simulateEvent2['default']('touchdrop', event, dataTransfer, target);
+    if (dragTime < DRAG_MIN_TIME || largestMove < DRAG_MIN_DISTANCE) {
+      moveStats.target.click?.()
+    } else {
+      touchDndCustomEvents.store.mode = 'readonly';
+      _simulateEvent2['default']('touchdrop', event, dataTransfer, target);
+    }
 
     touchDndCustomEvents.store.mode = 'protected';
     _simulateEvent2['default']('touchdragend', event, dataTransfer, target);
