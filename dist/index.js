@@ -25,6 +25,8 @@ var touchDndCustomEvents = {
   'store': null
 };
 
+const getPreviewContainer = () => document.getElementById('touchDndPreviewContainer')
+
 function handleTouchStart(event) {
   var target = event.target;
   if (target.hasAttribute("draggable")) {
@@ -66,7 +68,7 @@ function handleTouchStart(event) {
 
     // hijack previous pattern
     store.dragPreviewElement = preview
-    _dragPreview.updateDragPreview(preview, x, y);
+    _dragPreview.updateDragPreview(preview, event.targetTouches[0].pageX, event.targetTouches[0].pageY);
   }
 }
 
@@ -117,7 +119,7 @@ function handleTouchEnd(event) {
     event.preventDefault();
 
     // hide preview container & element before looking for intersection
-    document.getElementById('touchDndPreviewContainer').style.display = 'none'
+    getPreviewContainer().hidden = true
 
     var x = event.changedTouches[0].clientX;
     var y = event.changedTouches[0].clientY;
