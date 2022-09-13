@@ -24,8 +24,8 @@ function updateDragPreview(preview, x, y) {
   var container = document.getElementById(ID) || addDragPreview(preview);
 
   container.style.position = 'fixed';
-  container.style.top = y + preview.dragPointOffsetY + 'px';
-  container.style.left = x + preview.dragPointOffsetX + 'px';
+  container.style.top = y + preview.dragPointOffsetY + window.scrollY + 'px';
+  container.style.left = x + preview.dragPointOffsetX + window.scrollX + 'px';
   container.style.width = preview.width + 'px';
   container.style.height = preview.height + 'px';
 
